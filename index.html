@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMAX - عالم الألعاب</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b16;color:white;font-family:Arial,sans-serif}
+header{padding:24px 16px;text-align:center;background:#11182c;border-bottom:2px solid #784cff}
+.logo{font-size:38px;font-weight:900;color:#9b7aff}
+header p{color:#aaa}
+input{width:90%;padding:15px;border-radius:12px;border:1px solid #6652a8;background:#171d30;color:white;font-size:16px;margin:15px auto;display:block}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:12px}
+button{background:#25203d;color:white;border:1px solid #7957db;padding:10px 15px;border-radius:20px}
+button.active{background:#7045d9}
+h2{text-align:center;color:#a88aff}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px;padding:15px}
+.card{background:#151b2d;border:1px solid #303653;border-radius:14px;padding:15px;text-align:center}
+.cover{font-size:55px;background:#242443;border-radius:12px;padding:18px}
+.card h3{font-size:17px}
+.card p{color:#aaa;font-size:13px}
+.card a{display:block;background:#7549df;color:white;text-decoration:none;padding:11px;border-radius:9px}
+footer{text-align:center;color:#888;padding:25px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🎮 OMAX</div>
+<h1>عالم الألعاب بين يديك</h1>
+<p>اكتشف ألعابك المفضلة وحمّلها من مصادرها الرسمية</p>
+</header>
+
+<input id="search" placeholder="🔎 ابحث عن لعبة..." oninput="filterGames()">
+
+<nav>
+<button class="active" onclick="choose('all',this)">الكل</button>
+<button onclick="choose('android',this)">Android</button>
+<button onclick="choose('pc',this)">PC</button>
+<button onclick="choose('console',this)">Console</button>
+<button onclick="choose('horror',this)">رعب</button>
+<button onclick="choose('football',this)">كرة القدم</button>
+</nav>
+
+<h2>🔥 مكتبة الألعاب</h2>
+<div class="games" id="games">
+
+<div class="card" data-type="android">
+<div class="cover">🚗</div>
+<h3>Asphalt Legends</h3>
+<p>سباق سيارات - Android</p>
+<a href="https://play.google.com/store/search?q=Asphalt%20Legends&c=apps" target="_blank">صفحة التحميل</a>
+</div>
+
+<div class="card" data-type="android">
+<div class="cover">🎯</div>
+<h3>Roblox</h3>
+<p>مغامرات - Android</p>
+<a href="https://play.google.com/store/apps/details?id=com.roblox.client" target="_blank">صفحة التحميل</a>
+</div>
+
+<div class="card" data-type="android">
+<div class="cover">🔫</div>
+<h3>PUBG Mobile</h3>
+<p>حرب - Android</p>
+<a href="https://play.google.com/store/search?q=PUBG%20Mobile&c=apps" target="_blank">صفحة التحميل</a>
+</div>
+
+<div class="card" data-type="pc">
+<div class="cover">🚀</div>
+<h3>0 A.D.</h3>
+<p>استراتيجية - PC</p>
+<a href="https://play0ad.com/download/" target="_blank">تحميل رسمي</a>
+</div>
+
+<div class="card" data-type="pc">
+<div class="cover">🏎️</div>
+<h3>SuperTuxKart</h3>
+<p>سباق - PC</p>
+<a href="https://supertuxkart.net/Download" target="_blank">تحميل رسمي</a>
+</div>
+
+<div class="card" data-type="horror">
+<div class="cover">🧟</div>
+<h3>ألعاب الزومبي</h3>
+<p>رعب وبقاء</p>
+<a href="https://store.steampowered.com/tags/en/Zombies/" target="_blank">اكتشف الألعاب</a>
+</div>
+
+<div class="card" data-type="football">
+<div class="cover">⚽</div>
+<h3>ألعاب كرة القدم</h3>
+<p>رياضة - PC</p>
+<a href="https://store.steampowered.com/tags/en/Soccer/" target="_blank">اكتشف الألعاب</a>
+</div>
+
+<div class="card" data-type="console">
+<div class="cover">🎮</div>
+<h3>Xbox Games</h3>
+<p>ألعاب Xbox</p>
+<a href="https://www.xbox.com/games" target="_blank">اكتشف الألعاب</a>
+</div>
+
+</div>
+
+<footer>
+<p>OMAX © 2026</p>
+<p>جميع الحقوق لأصحاب الألعاب</p>
+</footer>
+
+<script>
+let category='all';
+function choose(type,btn){
+category=type;
+document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+filterGames();
+}
+function filterGames(){
+let q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.card').forEach(card=>{
+let matchCategory=category==='all'||card.dataset.type===category;
+let matchName=card.innerText.toLowerCase().includes(q);
+card.style.display=matchCategory&&matchName?'block':'none';
+});
+}
+</script>
+</body>
+</html>
